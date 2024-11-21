@@ -1,5 +1,8 @@
 package com.mobdeve.s20.arao.patricia.mplify
 
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -18,5 +21,15 @@ class LoginAccountFragment : Fragment(R.layout.fragment_login) {
                 addToBackStack(null) // Adds to back stack for navigation
             }
         }
+
+//        val mplifyTitle = findViewById<TextView>(R.id.mplifyTitle)
+//        val gradient = mplifyTitle.paint
+//        val width = gradient.measureText(mplifyTitle.text.toString())
+//        mplifyTitle.paint.shader = LinearGradient(
+//            0f,0f, width, mplifyTitle.textSize, intArrayOf(
+//                Color.parseColor("#0FA3B1"),
+//                Color.parseColor("#F7A072")
+//            ), null, Shader.TileMode.REPEAT
+//        )
     }
 }

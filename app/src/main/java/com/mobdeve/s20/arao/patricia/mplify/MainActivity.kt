@@ -35,15 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val mplifyTitle = findViewById<TextView>(R.id.mplifyTitle)
-        val gradient = mplifyTitle.paint
-        val width = gradient.measureText(mplifyTitle.text.toString())
-        mplifyTitle.paint.shader = LinearGradient(
-            0f,0f, width, mplifyTitle.textSize, intArrayOf(
-                Color.parseColor("#0FA3B1"),
-                Color.parseColor("#F7A072")
-            ), null, Shader.TileMode.REPEAT
-        )
+
     }
 
     private fun replaceFragment(fragment: Fragment) {
