@@ -5,9 +5,11 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 
 class LoginAccountFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -19,6 +21,14 @@ class LoginAccountFragment : Fragment(R.layout.fragment_login) {
             parentFragmentManager.commit {
                 replace(R.id.flFragment, CreateAccountFragment())
                 addToBackStack(null) // Adds to back stack for navigation
+            }
+        }
+
+        val homepageLink = view.findViewById<Button>(R.id.loginButton)
+        homepageLink.setOnClickListener {
+            parentFragmentManager.commit {
+                replace(R.id.flFragment, HomeFragment())
+                addToBackStack(null)
             }
         }
 

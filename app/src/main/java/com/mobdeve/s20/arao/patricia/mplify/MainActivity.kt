@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -13,19 +14,27 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var bottomNavigationView: BottomNavigationView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
 
 //        val createAccount = CreateAccountFragment()
 //        val loginAccount = LoginAccountFragment()
@@ -34,14 +43,41 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(LoginAccountFragment())
         }
 
+        bottomNavigationView = findViewById(R.id.bottomNavigation)
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.profile -> {
+                    replaceFragment(ProfileFragment())
+                    true
+                }
+                else -> false
+            }}
+
 
 
     }
 
     private fun replaceFragment(fragment: Fragment) {
+
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment, fragment)
             commit()
         }
+
+        updateBottomNavigationVisibility(fragment)
+
+    }
+
+    private fun updateBottomNavigationVisibility(fragment: Fragment) {
+        bottomNavigationView.visibility = when (fragment) {
+            is LoginAccountFragment, is CreateAccountFragment -> View.GONE // Hide for login/register
+            else -> View.VISIBLE // Show for other fragments
+        }
+
     }
 }
